@@ -1,4 +1,4 @@
-// Problem statement Link - https://leetcode.com/problems/binary-tree-level-order-traversal
+// problem statement link - https://leetcode.com/problems/average-of-levels-in-binary-tree/
 
 /**
  * Definition for a binary tree node.
@@ -13,12 +13,14 @@
  */
  
  // Iterative
+ // Time : O(n); Space: O(n)
  
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        
-        vector<vector<int>> res;
+    vector<double> averageOfLevels(TreeNode* root) {
+     
+         
+        vector<double> res;
         
           if(root == NULL){
             return res;
@@ -27,53 +29,36 @@ public:
         queue<TreeNode*> temp;
         temp.push(root);
         
+         double sum= 0;
+        
         while(temp.size() != 0)
         {
+              int count=0;
             vector<int> res1;
              int s =temp.size();
-               
+               int k=s;
             for(int i=0;i<s;i++)
             {
                 TreeNode* front = temp.front();
                 res1.push_back(front->val);
                 temp.pop();
                 
+                sum+=(double)front->val;
+                
                 if(front->left!=NULL){
+                    count++;
                     temp.push(front->left);
                 }
                 if(front->right!=NULL){
+                    count++;
                     temp.push(front->right);
                 }
             }
             
-            res.push_back(res1);
+            res.push_back((double)sum/k);
+            sum = 0;
         }
         return res;
-        
     }
 };
 
-// Recursive Depth-First Search(DFS) Approach
-
-class Solution {
-public:
-    vector<vector<int>>ans;
-	
-    void levelord1(TreeNode *root, int level) {
-        if (root == NULL) 
-		{
-			return;
-		}
-        if(level==ans.size())
-		{
-			ans.push_back(vector<int> ());
-		}
-        ans[level].push_back(root->val);
-        levelord1(root->left, level+1);
-        levelord1(root->right, level+1);
-    }
-    vector<vector<int>> levelOrder(TreeNode* root) {
-       levelord1(root,0);
-        return ans;
-    }
-};
