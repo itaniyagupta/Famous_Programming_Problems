@@ -1,4 +1,4 @@
-// Problem statemnt Link - https://leetcode.com/problems/binary-tree-right-side-view/submissions/; https://practice.geeksforgeeks.org/problems/right-view-of-binary-tree/1
+// problem Statement Link - https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
 
 /**
  * Definition for a binary tree node.
@@ -18,7 +18,7 @@ class Solution {
 public:
     
     vector<int> res;
-    void rightView(TreeNode* root, int level, int *max_level){ 
+    void LeftView(TreeNode* root, int level, int *max_level){ 
             if (root==NULL) 
             {
                 return; 
@@ -30,8 +30,9 @@ public:
                 *max_level = level; 
             } 
  
-            rightView(root->right, level+1, max_level); // visit right subtree before left subtree
-            rightView(root->left, level+1, max_level); 
+         // visit left subtree before right subtree
+            LeftView(root->left, level+1, max_level); 
+			LeftView(root->right, level+1, max_level);
        }
     
     vector<int> rightSideView(TreeNode* root) {

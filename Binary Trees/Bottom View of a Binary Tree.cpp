@@ -1,4 +1,4 @@
-// Problem Statement Link - https://practice.geeksforgeeks.org/problems/top-view-of-binary-tree/1
+// Problem Statement Link - https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
 
 /**
  * Definition for a binary tree node.
@@ -21,7 +21,7 @@ public:
             if (root == nullptr)
                 return;
         
-            if (map.find(dist) == map.end() || level < map[dist].second)
+            if (map.find(dist) == map.end() || level >= map[dist].second)
             {
                
                 map[dist] = { root->val, level };
