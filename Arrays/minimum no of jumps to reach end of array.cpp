@@ -1,4 +1,4 @@
-// Problem Statement Link - https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps/0
+// Problem Statement Link - https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps/0; https://leetcode.com/problems/jump-game-ii/
 
 // Brute Force solution - Recursive
 // Time : O(n^n); Space : O(1)
@@ -33,22 +33,20 @@ class solution{
 
 class solution{
 	public:
-		vector<int> minJumps(vector<int>& nums)
-		{
-			int n=nums.size();
-			vector<int> minjumps;
-			
-			minjumps[0] = 0;
-			
-			for(int i=0; i<n; i++)
-			{
-				for(int j=i+1; j<min(i+nums[i]+1,n); j++)
-				{
-					minJumps[j] = min(minJumps[j], 1+minJumps[i]);
-				}
-			}
-			return minJumps[n-1];
-		}
+		vector<int> minJumps(vector<int>& nums){
+			 int n= nums.size();
+        vector<int> minJumps(n+1, INT_MAX);
+        minJumps[0] = 0;
+        
+        for(int i=0; i<n; i++)
+        {
+          for(int j = i+1; j < min(i+nums[i]+1, n); j++) 
+          {
+            minJumps[j] = min(minJumps[j], 1 + minJumps[i]);
+          }
+        }
+        return minJumps[n-1];
+	}
 };
 			
 // Greedy Approach
@@ -58,19 +56,16 @@ class solution{
 	public:
 		vector<int> minJumps(vector<int>& nums, int curr_pos)
 		{	
-			int n = nums.size();
-			int prev, curr, jump;
-			prev = curr = jump =0;
-			
-			for(int i=0; i<n; i++)
-			{
-				if(i>prev)
-				{
-					jump++;
-					prev=curr;
+			int prev = 0;
+			int current = 0; 
+			int jumps = 0;
+			for(int i = 0; i < nums.size(); i++) {
+				if(i > prev) {
+					jumps++;
+					prev = current;
 				}
-				curr = max(curr, i+nums[i]);
+				current = max(current, i + nums[i]);
 			}
-			return jump;
+			return jumps;
 		}
 };
