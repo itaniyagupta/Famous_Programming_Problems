@@ -21,8 +21,7 @@ class solution{
 				MaximumSum = MaximumSum + abs(finalSequence[i] - finalSequence[i + 1]); 
 			} 
 		 
-			MaximumSum = MaximumSum + abs(finalSequence[n - 1] - 
-											  finalSequence[0]); 
+			MaximumSum = MaximumSum + abs(finalSequence[n - 1] - finalSequence[0]); 
 		  
 			return MaximumSum; 
 		} 
