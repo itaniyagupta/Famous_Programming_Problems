@@ -12,34 +12,53 @@
  * };
  */
 
+ /*
+ 
+     7   
+	/ \
+   6   5  
+  /	\  / \
+ 2  1 3   4
+ 
+ Input : [7,6,5,2,1,3,4]
+ Output : 2 6 7 5 4
+ 
+ */
+ 
 // Time: O(nlogn); Space: O(n)
 
+//  In code, dist -> horizontal distance & level is vertical level of node
 class Solution {
 public:
+// Recursive function to do pre-order traversal of the tree & fill the map
 		 void Topside(TreeNode* root, int dist, int level, map<int,pair<int,int>> &map)
     {
-            if (root == nullptr)
+            if (root == nullptr) // if root is empty return
                 return;
         
+		   // if current level is less than max level so far for same horizontal distance or horizontal distance is seen for ist time, then update map
             if (map.find(dist) == map.end() || level < map[dist].second)
             {
                
-                map[dist] = { root->val, level };
+                map[dist] = { root->val, level }; // update value and level for current distance
             }
 
-            Topside(root->left, dist - 1, level + 1, map);
-            Topside(root->right, dist + 1, level + 1, map);
+            Topside(root->left, dist - 1, level + 1, map); // Traverse left subtree by decrementing distance & incrementing level
+            Topside(root->right, dist + 1, level + 1, map); // Traverse left subtree by incrementing distance & incrementing level
         }
 
       
         vector<int> TopSideView(TreeNode* root)
         {
-            map<int, pair<int, int>> map;
-            Topside(root, 0, 0, map);
+            map<int, pair<int, int>> map; // map to store Horizontal distance, node value & corresponding level
+			                              // key -> relative horizontal distance of the node from root node and
+                                         // value -> pair containing node's value and its level
+			
+            Topside(root, 0, 0, map); // calling function with parameters root, level as 0, distance as 0 & map
             
-            vector<int> ans;
+            vector<int> ans;  // vector to store our final result
              for (auto it: map){
-                ans.push_back(it.second.first); 
+                ans.push_back(it.second.first);  // traverse map & store value in ans
              }
         return ans;
         }

@@ -5,7 +5,7 @@
 
 class solution{
 	public:
-		vector<int> minJumps(vector<int>& nums, int k)
+		int findKthLargest(vector<int>& nums, int k)
 		{
 		   int n= nums.size();
 		   sort(nums.begin(), nums.end());

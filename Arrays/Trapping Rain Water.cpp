@@ -6,7 +6,7 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-      	 int maxWater = 0;
+       int maxWater = 0;
        int rightHeight, leftHeight;
 		for (int i = 1; i<height.size()-1; i++) 
 		{

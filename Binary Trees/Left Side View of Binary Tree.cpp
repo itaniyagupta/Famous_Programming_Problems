@@ -12,18 +12,32 @@
  * };
  */
 
+ /*
+ 
+     7   <- level 0
+	/ \
+   6   5  <- level 1
+  /	\  / \
+ 2  1 3   4 <- level 2
+ 
+ Input : [7,6,5,2,1,3,4]
+ Output : 7 6 2
+ 
+ */
+ 
  // Time: O(nlogn); Space: O(n)
  
 class Solution {
 public:
     
-    vector<int> res;
+    vector<int> res; // vector to store final result
     void LeftView(TreeNode* root, int level, int *max_level){ 
             if (root==NULL) 
-            {
+            {				// if root is empty return
                 return; 
             }
-        
+        // If curr level is more than max level so far, the push node into res
+           // If this is the last Node of its level 
             if (*max_level < level) 
             { 
                 res.push_back(root->val);
@@ -37,7 +51,7 @@ public:
     
     vector<int> rightSideView(TreeNode* root) {
      
-        int max_level = 0; 
+        int max_level = 0; // max level as 0
         rightView(root, 1, &max_level); 
         return res;
     }

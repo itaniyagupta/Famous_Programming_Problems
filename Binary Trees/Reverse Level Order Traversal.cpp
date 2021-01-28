@@ -12,6 +12,23 @@
  * };
  */
 
+ /*
+     7   <- level 0
+	/ \
+   6   5  <- level 1
+  /	\  / \
+ 2  1 3   4 <- level 2
+ 
+ Reverse Level order traversal : 2 1 3 4 6 5 7 
+ 
+ Input : [7,6,5,2,1,3,4]
+ Output :   [
+			[2,1,3,4],
+			[6,5],
+			[7]	
+			]
+*/
+ 
 // Time : O(n)
 
 class Solution {
@@ -28,7 +45,6 @@ public:
         
         while(temp.size() != 0)
         {
-              int count=0;
             vector<int> res1;
              int s =temp.size();
                
@@ -39,19 +55,47 @@ public:
                 res1.push_back(front->val);
                 
                 if(front->left!=NULL){
-                    count++;
                     temp.push(front->left);
                 }
                 if(front->right!=NULL){
-                    count++;
                     temp.push(front->right);
                 }
                
             }
-            
             res.push_back(res1);
         }
         reverse(res.begin(),res.end());
         return res;
     }
 };
+
+
+/* visualization of Queue & vector in Iterative solution
+
+				First root          while loop starts                 This is repeated till queue              Reverse the res vector
+				is pushed         then top element of queue			    becomes empty						   we have our reverse
+				onto Queue			is popped out  																	level order 
+								left of node is pushed 							
+								  & then right is pushed           
+								   onto queue				       
+	
+														
+ Queue temp 	    			      				   				
+														     		
+				|		 |        |        |  ->	|		|   ->  |  4  |
+				|		 |    ->  |	       |		|	1	|		|  3  |   .... ->  	|	|
+				|		 |		  |	   5   |		|	2	|	    |  1  |      		|	|
+				|	7	 |		  |	   6   |		|	5	|		|  2  |				|	|
+				|        |        |        |		|       |		|     |				|	|
+                          
+						 
+vector res1        |_|        ->   |7|  ->   |_|	 ->	 |6|     ->   |6|5|   ->  |_| ->     |2|1|3|4|
+			
+				vector is 
+				empty
+				
+2D Vector res        |_|               |7|     ->        |7|      -> |7|      ->  |7|  -> |7|             -> |2|1|3|4|
+																     |6|5|                |6|5|				  |6|5|
+																						  |2|1|3|4|            |7|
+
+*/

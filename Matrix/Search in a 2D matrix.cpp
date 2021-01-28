@@ -35,10 +35,15 @@ class Solution {
 class Solution {
  public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-		if(matrix.empty())
-		{
-			return false;
-		}
+		 if(matrix.size() == 0 && target == 0)
+        {
+            return false;
+        }
+        
+        int smallest = matrix[0][0], largest = matrix[matrix.size() - 1][matrix.size() - 1]; 
+        if (target < smallest || target > largest) 
+             return false;
+		 
 		int m = matrix.size();
 		int n = matrix[0].size();
 		int row = 0,col = n-1;
