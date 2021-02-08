@@ -21,13 +21,14 @@ public:
         ListNode* curr = head;
         ListNode* prev = NULL;
         ListNode* next= NULL;
-        
+		
+		// getting to m        
         for(int i=1; i<m; i++) {
             prev = curr;
             curr = curr->next;
         }
         
-        
+        //reverse until n
         for(int i=m; i<n; i++) {
             if(curr->next == NULL) {
                 break;

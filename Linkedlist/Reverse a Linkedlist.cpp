@@ -23,17 +23,14 @@ public:
         
          while(curr != NULL)
          {
-             next = curr->next;
-             curr->next = prev; 
-             prev = curr;
+             next = curr->next; // store next node Before changing next of current
+             curr->next = prev; // here reversing happens; curr->next points to prev
+             prev = curr;     // Move prev and curr one step forward 
              curr = next;
          }
-             head = prev;
-    
+             head = prev; // head node is at prev
      return head;
-    
 };
-
 
 // Recursive
 
@@ -45,10 +42,11 @@ public:
         {
             return head;
         }
-        ListNode *smallans = reverseList(head->next);
+	                           //	Divide the list in two parts - head node &  rest of the linked list
+        ListNode *smallans = reverseList(head->next); // calling reverse for the rest of the linked list.
         ListNode *tail = head->next;
-                
-        tail -> next = head;
+                                            //  Link rest to first & then fix head pointer
+        tail -> next = head;       
         head -> next = NULL;       
     
     return smallans;
